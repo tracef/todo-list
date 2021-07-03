@@ -1,4 +1,5 @@
 import { useState } from 'react'
+
 export const Form = ({ addToDo, clearCompleted }) => {
     const [userInput, setUserInput] = useState('')
 
@@ -7,7 +8,7 @@ export const Form = ({ addToDo, clearCompleted }) => {
     }
 
     const handleSubmit = () => {
-        if(userInput !== ''){
+        if (userInput !== '') {
             addToDo(userInput)
             setUserInput('');
         }
@@ -18,7 +19,7 @@ export const Form = ({ addToDo, clearCompleted }) => {
     }
 
     return (
-        <div className="grid grid-cols-3">
+        <div className="grid grid-cols-3 no-print">
             <div className="col-span-3">
                 <textarea value={userInput} onChange={handleChange} className="p-1 w-full border border-gray-800 resize-none rounded-sm focus:outline-none" type="text" placeholder="enter a task" rows="3" />
             </div>

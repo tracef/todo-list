@@ -1,5 +1,5 @@
 import './App.css';
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import { Header } from './components/Header'
 import { ToDoList } from './components/ToDoList';
 import { Form } from './components/Form';
@@ -7,18 +7,40 @@ import { Form } from './components/Form';
 const App = () => {
   const [toDoList, setToDoList] = useState([]);
 
+  useEffect(() => {
+    retrieveToDoList(localStorage.getItem('toDoList'))
+  }, [])
+
+  const retrieveToDoList = (listStr) => {
+    if (listStr) {
+      const list = JSON.parse(listStr);
+      if (list.length > 0) {
+        setToDoList([...list]);
+      }
+    }
+  }
+
+  const saveToDoList = (list) => {
+    setToDoList([...list])
+
+    if (!list || list.length === 0)
+      localStorage.removeItem('toDoList', JSON.stringify(list));
+    else
+      localStorage.setItem('toDoList', JSON.stringify(list));
+  }
+
   const addToDo = (userInput) => {
     let copy = [...toDoList, { id: toDoList.length + 1, task: userInput, complete: false }]
-    setToDoList([...generateNewIDs(copy)]);
+    saveToDoList([...generateNewIDs(copy)])
   }
 
   const clearCompleted = () => {
     let copy = [...toDoList.filter(x => !x.complete)]
-    setToDoList([...generateNewIDs(copy)])
+    saveToDoList([...generateNewIDs(copy)])
   }
 
   const completeToDo = (id) => {
-    setToDoList([...toDoList.map(x => x.id === Number(id) ? { ...x, complete: !x.complete } : { ...x })]);
+    saveToDoList([...toDoList.map(x => x.id === Number(id) ? { ...x, complete: !x.complete } : { ...x })]);
   }
 
   const generateNewIDs = (copy) => {
