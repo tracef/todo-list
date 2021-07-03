@@ -24,7 +24,7 @@ const App = () => {
     setToDoList([...list])
 
     if (!list || list.length === 0)
-      localStorage.removeItem('toDoList', JSON.stringify(list));
+      localStorage.removeItem('toDoList');
     else
       localStorage.setItem('toDoList', JSON.stringify(list));
   }
