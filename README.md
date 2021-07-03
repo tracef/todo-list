@@ -4,10 +4,10 @@
 
 **As a user, I want to be able to:**
 
-* View a list of tasks
-* Add new tasks via mouse and keyboard
-* Delete existing tasks via mouse and keybord
-* Mark tasks as complete/incomplete via mouse and keyboard
+* View a list of tasks - complete
+* Add new tasks - complete
+* Delete existing tasks - complete
+* Mark tasks as complete/incomplete - complete
 * Interact with my list at a later time
 * Re-order tasks
 
